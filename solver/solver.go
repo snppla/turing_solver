@@ -133,5 +133,27 @@ NEXT_COMBINATION:
 		return false
 	})
 
+	// look through the return value and remove any duplicates of the VerifierIndexes
+	for i := 0; i < len(returnValue)-1; i++ {
+		duplicateFound := false
+		for j := i + 1; j < len(returnValue); j++ {
+			for k := 0; k < len(criteriaList); k++ {
+				if returnValue[i].VerifierIndexes[k] != returnValue[j].VerifierIndexes[k] {
+					break
+				}
+				if k == len(criteriaList)-1 {
+					returnValue = append(returnValue[:j], returnValue[j+1:]...)
+					j--
+					duplicateFound = true
+				}
+			}
+		}
+		if duplicateFound {
+			returnValue = append(returnValue[:i], returnValue[i+1:]...)
+			i--
+
+		}
+	}
+
 	return returnValue
 }

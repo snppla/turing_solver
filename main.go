@@ -78,7 +78,7 @@ func main() {
 	possiblePaths := solver.GetPossiblePaths(cardsToPlay, verifiersToInclude, verifiersToExclude)
 
 	for _, paths := range possiblePaths {
-		fmt.Printf("%v\n", paths.Combination)
+		fmt.Printf("%v with verifiers %v\n", paths.Combination, paths.VerifierIndexes)
 	}
 
 	// map which criteria cards had multiple verifiers used
